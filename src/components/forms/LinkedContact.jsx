@@ -19,11 +19,13 @@ import CloseIcon from "@mui/icons-material/Close";
 import { styled } from '@mui/material/styles';
 import dayjs from 'dayjs';
 import { createContactAction } from "../../redux/actions/createContactAction";
+import { linkContactToClientAction } from "../../redux/actions/linkContactToClientAction";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Collapse,
   Alert,
 } from "@mui/material";
+import { clientListAction } from "../../redux/actions/clientListAction";
 let easing = [0.6, -0.05, 0.01, 0.99];
 const animate = {
   opacity: 1,
@@ -58,14 +60,10 @@ const CreateContactForm = ({ setAuth }) => {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch=useDispatch()
   const SignupSchema = Yup.object().shape({
-    name: Yup.string()
+    clientCode: Yup.string()
       .min(2, "Too Short!")
       .max(50, "Too Long!")
-      .required("Name required"),
-    sureName: Yup.string()
-      .min(2, "Too Short!")
-      .max(50, "Too Long!")
-      .required("Surename required"),
+      .required("ClientCode required"),
     email: Yup.string()
       .email("Email must be a valid email address")
       .required("Email is required"),
@@ -74,17 +72,16 @@ const CreateContactForm = ({ setAuth }) => {
 
   const formik = useFormik({
     initialValues: {
-      name: "",
-      sureName: "",
+      clientCode: "",
       email: "",
      
     },
     validationSchema: SignupSchema,
     onSubmit: async(values) => {
-      const name=values.name
-      const sureName=values.sureName
+      const clientCode=values.clientCode
       const email=values.email
-      await dispatch(createContactAction({name,sureName,email}))
+      console.log("email and client code:",clientCode,email)
+      await dispatch(linkContactToClientAction({clientCode,email}))
     },
   });
 
@@ -94,34 +91,38 @@ const [successMessage,setSuccessMessage]=useState("")
 const [clientCode,setClientCode]=useState("")
 const [open,setOpen]=useState(true)
 const [openSuccess,setOpenSuccess]=useState(true)
-const createContact=useSelector((state)=>state.createContact)
+const linkContactToClient=useSelector((state)=>state.linkContactToClient)
+
 const handleClose=()=>{
-  createContact.details=['']
-  createContact.error=['']
+  linkContactToClient.details=['']
+  linkContactToClient.error=['']
   setOpenSuccess(false)
   setOpen(false)
 }
   useEffect(() => {
     async function fetchData() {
-      if (!createContact.loading) {
-        if (createContact.details.length !== 0) {
-          if (createContact.details.statusCode === 200) {
-            setSuccessMessage(createContact.details.message)
-           setClientCode(createContact.details.data.name)
+      if (!linkContactToClient.loading) {
+        if (linkContactToClient.details.length !== 0) {
+          if (linkContactToClient.details.statusCode === 200) {
+            setSuccessMessage(linkContactToClient.details.message)
+         //  setClientCode(createContact.details.data.name)
            setOpenSuccess(true)
           // await dispatch(clientListAction())
           } else {
             return null;
           }
         }
-        if (createContact.error) {
-          setErrorMessage(createContact.error);
+        if (linkContactToClient.error) {
+          setErrorMessage(linkContactToClient.error);
           setOpen(true)
         }
       }
     }
     fetchData();
-  }, [createContact.details]);
+  }, [linkContactToClient.details]);
+
+
+
   return (
     <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
@@ -180,55 +181,29 @@ const handleClose=()=>{
          <TextField
               fullWidth
               size="small"
-              label="Name"
-              name="name"
-              value={formik.values.name}
+              label="Client Code"
+              name="clientCode"
+              value={formik.values.clientCode}
               onChange={formik.handleChange}
-              {...getFieldProps("name")}
-              error={Boolean(touched.name && errors.name)}
-              helperText={touched.name && errors.name}
+              {...getFieldProps("clientCode")}
+              error={Boolean(touched.clientCode && errors.clientCode)}
+              helperText={touched.clientCode && errors.clientCode}
             />
-                <TextField
+               
+             <TextField
              fullWidth
              size="small"
-             label="SureName"
-             name="sureName"
-              value={formik.values.sureName}
-              onChange={formik.handleChange}
-             {...getFieldProps("sureName")}
-             error={Boolean(touched.sureName && errors.sureName)}
-             helperText={touched.sureName && errors.sureName}
+             autoComplete="username"
+             name="email"
+            value={formik.values.email}
+            onChange={formik.handleChange}
+             type="email"
+             label="Email"
+             {...getFieldProps("email")}
+             error={Boolean(touched.email && errors.email)}
+             helperText={touched.email && errors.email}
+          
             />
-          </Stack>
-          <Stack
-            component={motion.div}
-            initial={{ opacity: 0, y: 60 }}
-            animate={animate}
-            direction={{ xs: "column", sm: "row" }}
-            spacing={2}
-          >
-            <TextField
-               fullWidth
-               size="small"
-               autoComplete="username"
-               name="email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-               type="email"
-               label="Email"
-               {...getFieldProps("email")}
-               error={Boolean(touched.email && errors.email)}
-               helperText={touched.email && errors.email}
-            />
-          </Stack>
-        
-          <Stack
-            component={motion.div}
-            initial={{ opacity: 0, y: 60 }}
-            animate={animate}
-            direction={{ xs: "column", sm: "row" }}
-            spacing={2}
-          >
           </Stack>
           <Box
             component={motion.div}

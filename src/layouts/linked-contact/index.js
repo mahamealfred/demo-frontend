@@ -3,6 +3,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { Container, Typography, Link, Box, Divider, Paper, CssBaseline } from "@mui/material";
 import styled from "@emotion/styled";
 import CreateContactForm from "../../components/forms/CreateContactForm";
+import LinkedContact from "../../components/forms/LinkedContact";
 // import Logo from "../../components/";
 import { motion } from "framer-motion";
 import ContactList from "../../components/forms/ContactList";
@@ -61,11 +62,11 @@ const CreateContact = ({ setAuth }) => {
           <HeadingStyle component={motion.div} {...fadeInUp}>
             {/* <Logo /> */}
             <Typography sx={{ color: "text.secondary", mb: 5 }}>
-        CONTACT FORM
+        Link Contact To Client
               <Divider sx={{ my: 3 }} component={motion.div} {...fadeInUp}/>
             </Typography>
           </HeadingStyle>
-          <CreateContactForm setAuth={setAuth} />
+          <LinkedContact setAuth={setAuth} />
           <Typography
             component={motion.p}
             {...fadeInUp}
@@ -82,7 +83,7 @@ const CreateContact = ({ setAuth }) => {
       </Container>
       </Paper>
     </RootStyle>
-<ContactList/>
+
     </React.Fragment>
   
   );

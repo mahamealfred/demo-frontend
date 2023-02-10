@@ -5,7 +5,12 @@ import styled from "@emotion/styled";
 import ClientForm from "../../components/forms/ClientForm";
 // import Logo from "../../components/";
 import { motion } from "framer-motion";
+import ClientList from "../../components/forms/ClientList";
+// import { useDispatch,useSelector } from "react-redux";
+// import { createClientAction } from "../../redux/actions/createClientAction";
 const AppBar =lazy(() => import('../../components/appbar'))
+
+
 
 //////////////////////////////////
 const RootStyle = styled("div")({
@@ -63,11 +68,8 @@ const Signup = ({ setAuth }) => {
          CLIENT FORM
               <Divider sx={{ my: 3 }} component={motion.div} {...fadeInUp}/>
             </Typography>
-       
           </HeadingStyle>
-
           <ClientForm setAuth={setAuth} />
-
           <Typography
             component={motion.p}
             {...fadeInUp}
@@ -75,7 +77,6 @@ const Signup = ({ setAuth }) => {
             align="center"
             sx={{ mt: 3 }}
           >
-         
             <Link variant="subtitle2" component={RouterLink} to="/">
         Go Back
             </Link>
@@ -84,7 +85,7 @@ const Signup = ({ setAuth }) => {
       </Container>
       </Paper>
     </RootStyle>
-
+<ClientList/>
     </React.Fragment>
   
   );
