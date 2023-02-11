@@ -24,6 +24,7 @@ import {
   Collapse,
   Alert,
 } from "@mui/material";
+import { contactListAction } from "../../redux/actions/contactListAction";
 let easing = [0.6, -0.05, 0.01, 0.99];
 const animate = {
   opacity: 1,
@@ -109,7 +110,7 @@ const handleClose=()=>{
             setSuccessMessage(createContact.details.message)
            setClientCode(createContact.details.data.name)
            setOpenSuccess(true)
-          // await dispatch(clientListAction())
+           await dispatch(contactListAction())
           } else {
             return null;
           }

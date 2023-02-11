@@ -229,10 +229,10 @@ export default function Transactions() {
            <StyledTableRow key={details._id}  selected={selectedExamIds.indexOf(details._id) !== -1}>
            <StyledTableCell component="th" scope="row" align="left"> {details.name} {details.surename}</StyledTableCell>
    <StyledTableCell align="left">{details.email}</StyledTableCell>
-   <StyledTableCell align="center">1</StyledTableCell>
+   <StyledTableCell align="center">{details.linkedClients.length}</StyledTableCell>
    <StyledTableCell align="center">
 
-   <Link to="/">Link Client</Link>
+   <Link to="/linked-contact">Link Client</Link>
    </StyledTableCell>
  </StyledTableRow>
          ))}
@@ -243,10 +243,10 @@ export default function Transactions() {
                     <StyledTableRow key={details._id}  selected={selectedExamIds.indexOf(details._id) !== -1}>
                     <StyledTableCell component="th" scope="row" align="left"> {details.name} {details.surename}</StyledTableCell>
             <StyledTableCell align="left">{details.email}</StyledTableCell>
-            <StyledTableCell align="center">1</StyledTableCell>
+            <StyledTableCell align="center">{details.linkedClients.length}</StyledTableCell>
             <StyledTableCell align="center">
     
-            <Link to="/">Link Client</Link>
+            <Link to="/linked-contact">Link Client</Link>
             </StyledTableCell>
           </StyledTableRow>
                 ))}
