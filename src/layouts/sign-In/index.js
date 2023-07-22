@@ -23,7 +23,7 @@ const HeadingStyle = styled(Box)({
 });
 
 const ContentStyle = styled(Box)({
-  maxWidth: 500,
+  maxWidth: 480,
   padding: 25,
   margin: "auto",
   display: "flex",
