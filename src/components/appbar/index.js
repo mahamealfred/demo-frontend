@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Avatar from '@mui/material/Avatar';
 import Tooltip from '@mui/material/Tooltip';
-import logo from "../../assets/images/bcitylogo.png"
+import logo from "../../assets/images/logo.png"
 import { Button} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,7 +22,7 @@ function Index() {
 
   return (
 <Box >
-<AppBar  sx={{backgroundColor:"white"}} position="sticky" elevation={0}>
+<AppBar  sx={{backgroundColor:"#000057"}} position="sticky" elevation={0}>
   <Toolbar>
    
      <Box
@@ -30,7 +30,7 @@ function Index() {
             sx={{
             height: 80,
             objectFit:"contain",
-            flexGrow: 0.5
+            flexGrow:{xs:0.5,sm:0.2}
             }}
             alt="Your logo."
             src={logo}
