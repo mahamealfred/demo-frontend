@@ -28,7 +28,7 @@ function Index() {
      <Box
             component="img"
             sx={{
-            height: 80,
+            height: "10vh",
             objectFit:"contain",
             flexGrow:{xs:0.5,sm:0.2}
             }}

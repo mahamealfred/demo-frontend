@@ -1,6 +1,6 @@
 import React,{lazy} from "react";
 import { Link as RouterLink } from "react-router-dom";
-import { Container, Typography, Link, Box, Divider, Paper, CssBaseline } from "@mui/material";
+import { Container, Button,Typography, Link, Box, Divider, Paper, CssBaseline } from "@mui/material";
 import styled from "@emotion/styled";
 import CreateContactForm from "../../components/forms/CreateContactForm";
 // import Logo from "../../components/";
@@ -9,11 +9,22 @@ import ContactList from "../../components/forms/ContactList";
 import SignInForm from "../../components/forms/SignInForm";
 
 const AppBar =lazy(() => import('../../components/appbar'))
+const StyledContent = styled('div')(({ theme }) => ({
+    maxWidth: 480,
+    margin: 'auto',
+    minHeight: '35vh',
+    display: 'flex',
+    justifyContent: 'center',
+ 
+    flexDirection: 'column',
+    padding: 12,
+  }));
 
 //////////////////////////////////
 const RootStyle = styled("div")({
-  background: "rgb(249, 250, 251)",
-  height: "90vh",
+background:"#000057",
+// background: "rgb(249, 250, 251)",
+  height: "55vh",
   display: "grid",
   placeItems: "center",
 });
@@ -84,6 +95,24 @@ Forgot Password?
       </Container>
       </Paper>
     </RootStyle>
+
+    <Container>
+        <StyledContent sx={{ textAlign: 'center', alignItems: 'center' }}>
+          <Typography variant="h4" paragraph textAlign='center'>
+          How can we help you?
+          </Typography>
+
+          <Typography sx={{ color: 'text.secondary',textAlign: 'center' }}>
+          As guides through the maze of digital change,
+         we help our clients deliver the amazing digital customer experiences that their clients demand.
+           Different services are necessary for each case.
+          </Typography>
+
+          
+
+        
+        </StyledContent>
+      </Container>
 
     </React.Fragment>
   
