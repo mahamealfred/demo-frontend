@@ -10,7 +10,7 @@ import {
   BannerTitle,
 } from "../../styles/banner";
 // import startimage from "../../assets/images/startimage.png";
-import startimage from "../../assets/images/bcitylogo.png";
+import startimage from "../../assets/images/logo.png";
 import { useNavigate } from "react-router-dom";
 import {CssBaseline} from "@mui/material";
 const AppBar = lazy(() => import('../../components/appbar'))
