@@ -8,7 +8,6 @@ import { fShortenNumber } from '../../../utils/formatNumber';
 import Iconify from '../../../components/iconify';
 
 // ----------------------------------------------------------------------
-
 const StyledIcon = styled('div')(({ theme }) => ({
   margin: 'auto',
   display: 'flex',
@@ -21,7 +20,6 @@ const StyledIcon = styled('div')(({ theme }) => ({
 }));
 
 // ----------------------------------------------------------------------
-
 AppWidgetSummary.propTypes = {
   color: PropTypes.string,
   icon: PropTypes.string,
