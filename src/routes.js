@@ -9,6 +9,7 @@ import SimpleLayout from './layouts/simple';
  import Page404 from './pages/Page404';
 // import ProductsPage from './pages/ProductsPage';
  import DashboardAppPage from './pages/DashboardAppPage';
+ import RraServicePage from './pages/services/rra';
 
 // ----------------------------------------------------------------------
 
@@ -24,7 +25,7 @@ export default function Router() {
        children: [
            { element: <Navigate to="/dashboard/services" />, index: true },
            { path: 'services', element: <DashboardAppPage /> },
-    //     { path: 'user', element: <UserPage /> },
+           { path: '/dashboard/services/rra-service', element: <RraServicePage /> },
     //     { path: 'products', element: <ProductsPage /> },
     //     { path: 'blog', element: <BlogPage /> },
          ],

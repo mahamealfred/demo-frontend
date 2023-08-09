@@ -1,12 +1,22 @@
+import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { faker } from '@faker-js/faker';
 // @mui
 import { useTheme } from '@mui/material/styles';
 import { Grid, Container, Typography, Button, CardActionArea, CardMedia, CardContent, Card } from '@mui/material';
 import rraLogo from "../assets/images/rra.png"
-import mutuwelLogo from "../assets/images/mutuwel.jpg";
+import mutuwelLogo from "../assets/images/rssb.avif";
 import electricityLogo from "../assets/images/electricity.png";
+import ejohezaLogo from "../assets/images/ejoheza.jpg";
+import { useNavigate } from "react-router-dom";
 
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
+import RraPage from "../pages/services/rra";
 // components
 import Iconify from '../components/iconify';
 // sections
@@ -20,9 +30,46 @@ import {
 
 export default function DashboardAppPage() {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleRRaServicesPage=()=>{
+  //  navigate("/dashboard/services/rra-service" )
+  setOpen(true);
+  }
 
   return (
     <>
+
+<Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+        maxWidth="md"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"RRA Payment Service"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+          <RraPage/>
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+        </DialogActions>
+      </Dialog>
+
+
+
+
       <Helmet>
         <title> Quantum Solutions </title>
       </Helmet>
@@ -42,7 +89,9 @@ export default function DashboardAppPage() {
              padding: "0.1em",
            }}
           >
-            <CardActionArea>
+            <CardActionArea
+            onClick={handleRRaServicesPage}
+            >
                  <CardMedia
                 component="img"
                 sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
@@ -128,7 +177,7 @@ export default function DashboardAppPage() {
                 component="img"
                 sx={{ padding: "1em 1em 0 1em", objectFit: "contain" }}
                 height="140"
-                image={mutuwelLogo}
+                image={ejohezaLogo}
                 alt="rra logo"
                    />
                  <CardContent>
