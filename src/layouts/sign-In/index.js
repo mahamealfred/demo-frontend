@@ -103,9 +103,9 @@ Forgot Password?
           </Typography>
 
           <Typography sx={{ color: 'text.secondary',textAlign: 'center' }}>
-          As guides through the maze of digital change,
+         As guides through the maze of digital change,
          we help our clients deliver the amazing digital customer experiences that their clients demand.
-           Different services are necessary for each case.
+         Different services are necessary for each case.
           </Typography>
 
           

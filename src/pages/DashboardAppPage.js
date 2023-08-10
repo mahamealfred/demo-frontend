@@ -101,7 +101,7 @@ export default function DashboardAppPage() {
                    />
                  <CardContent>
                  <Typography gutterBottom variant="h5" component="div">
-                 RRA payament Service
+                 RRA Payment Service
                 </Typography>
                <Typography variant="body2" color="text.secondary">
                 By using this service you will be able to pay RRA tax.
@@ -130,7 +130,7 @@ export default function DashboardAppPage() {
                    />
                  <CardContent>
                  <Typography gutterBottom variant="h5" component="div">
-                 MUTUWEL payament Service
+                 Mituwel Payment Service
                 </Typography>
                <Typography variant="body2" color="text.secondary">
                 By using this service you will be able to pay MUTUWEL.
@@ -156,7 +156,7 @@ export default function DashboardAppPage() {
                    />
                  <CardContent>
                  <Typography gutterBottom variant="h5" component="div">
-                 ELECTRICITY  Service
+                 Electricty Payment Service
                 </Typography>
                <Typography variant="body2" color="text.secondary">
                 By using this service you will be able to pay ELECTRICITY.
@@ -182,7 +182,7 @@ export default function DashboardAppPage() {
                    />
                  <CardContent>
                  <Typography gutterBottom variant="h5" component="div">
-                 MITUWEL payament Service
+                 Ejehoze Payment Service
                 </Typography>
                <Typography variant="body2" color="text.secondary">
                 By using this service you will be able to pay MITUWEL.
