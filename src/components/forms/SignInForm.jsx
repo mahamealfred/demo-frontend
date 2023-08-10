@@ -25,6 +25,7 @@ import {
   Alert,
 } from "@mui/material";
 import { contactListAction } from "../../redux/actions/contactListAction";
+import { useNavigate } from "react-router-dom";
 let easing = [0.6, -0.05, 0.01, 0.99];
 const animate = {
   opacity: 1,
@@ -57,16 +58,13 @@ const SignInForm= ({ setAuth }) => {
  
   const [value, setValue] = useState(dayjs('2022-04-07'));
   const [showPassword, setShowPassword] = useState(false);
+  const navigate=useNavigate();
   const dispatch=useDispatch()
   const SignupSchema = Yup.object().shape({
-    name: Yup.string()
+    password: Yup.string()
       .min(2, "Too Short!")
       .max(50, "Too Long!")
       .required("Name required"),
-    sureName: Yup.string()
-      .min(2, "Too Short!")
-      .max(50, "Too Long!")
-      .required("Surename required"),
     email: Yup.string()
       .email("Email must be a valid email address")
       .required("Email is required"),
@@ -75,17 +73,17 @@ const SignInForm= ({ setAuth }) => {
 
   const formik = useFormik({
     initialValues: {
-      name: "",
-      sureName: "",
+      password: "",
       email: "",
      
     },
     validationSchema: SignupSchema,
     onSubmit: async(values) => {
-      const name=values.name
-      const sureName=values.sureName
+      const password=values.password
       const email=values.email
-      await dispatch(createContactAction({name,sureName,email}))
+      console.log("kkk",values)
+     // await dispatch(createContactAction({name,sureName,email}))
+     navigate('/dashboard/services')
     },
   });
 
@@ -184,8 +182,8 @@ const handleClose=()=>{
                size="small"
                autoComplete="username"
                name="email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
+               value={formik.values.email}
+               onChange={formik.handleChange}
                type="email"
                label="Email"
                {...getFieldProps("email")}
@@ -205,8 +203,8 @@ const handleClose=()=>{
                size="small"
                autoComplete="password"
                name="password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
+               value={formik.values.password}
+               onChange={formik.handleChange}
                type="password"
                label="Password"
                {...getFieldProps("password")}
