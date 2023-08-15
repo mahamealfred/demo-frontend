@@ -1,8 +1,8 @@
 import {
-    CREATE_CONTACT_REQUEST,
-    CREATE_CONTACT_SUCCESS,
-    CREATE_CONTACT_FAILURE,
-  } from "../types/createContactType";
+    RRA_PAYMENT_REQUEST,
+    RRA_PAYMENT_SUCCESS,
+    RRA_PAYMENT_FAILURE,
+  } from "../types/rraPaymentType";
   
   const initialState = {
     loading: false,
@@ -12,18 +12,18 @@ import {
   
   const reducer = (state = initialState, action) => {
     switch (action.type) {
-      case CREATE_CONTACT_REQUEST:
+      case RRA_PAYMENT_REQUEST:
         return {
           ...state, 
           loading: true,
         };
-      case CREATE_CONTACT_SUCCESS:
+      case RRA_PAYMENT_SUCCESS:
         return {
           loading: false,
           details: action.payload,
           error: "",
         };
-      case CREATE_CONTACT_FAILURE:
+      case RRA_PAYMENT_FAILURE:
         return {
           loading: false,
           details: [],

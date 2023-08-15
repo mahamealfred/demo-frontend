@@ -18,9 +18,9 @@ import Typography from "@mui/material/Typography";
 
 
 import { useDispatch } from "react-redux";
-import { clientListAction } from '../../redux/actions/clientListAction';
+
 import PrintIcon from '@mui/icons-material/Print';
-import { contactListAction } from '../../redux/actions/contactListAction';
+
 import { Link } from 'react-router-dom';
 
 // export let amountPaid=[]
@@ -106,47 +106,47 @@ export default function Transactions() {
     }
   };
  
-  useEffect(() => {
-    async function fecthData(){
-  await dispatch(contactListAction())
-    }
-  fecthData();
+  // useEffect(() => {
+  //   async function fecthData(){
+  // await dispatch(contactListAction())
+  //   }
+  // fecthData();
   
-    }, []);
+  //   }, []);
 
 
-  useEffect(() => {
-    async function fetchData() {
-      if (!contactList.loading) {
-        if (contactList.details) {
-          setContactDetails(contactList.details.data);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     if (!contactList.loading) {
+  //       if (contactList.details) {
+  //         setContactDetails(contactList.details.data);
     
-        }
-      }
-    }
-    fetchData();
-  }, [contactList.details]);
+  //       }
+  //     }
+  //   }
+  //   fetchData();
+  // }, [contactList.details]);
 
-  useEffect(() => {
-    async function fecthData(){
-  await dispatch(clientListAction())
-    }
-  fecthData();
+  // useEffect(() => {
+  //   async function fecthData(){
+  // await dispatch(clientListAction())
+  //   }
+  // fecthData();
   
-    }, []);
+  //   }, []);
 
 
-  useEffect(() => {
-    async function fetchData() {
-      if (!clientList.loading) {
-        if (clientList.details) {
-          setClientDetails(clientList.details.data);
-          setLinkedContact(clientList.details.data)
-        }
-      }
-    }
-    fetchData();
-  }, [clientList.details]);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     if (!clientList.loading) {
+  //       if (clientList.details) {
+  //         setClientDetails(clientList.details.data);
+  //         setLinkedContact(clientList.details.data)
+  //       }
+  //     }
+  //   }
+  //   fetchData();
+  // }, [clientList.details]);
   
   console.log("number of linked contact",linkedContact)
  

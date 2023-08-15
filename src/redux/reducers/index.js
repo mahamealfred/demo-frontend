@@ -1,17 +1,15 @@
 import { combineReducers } from "redux";
-   import createClientReducer from "./createClientReducer";
-   import clientListReducer from "./clientListReducer";
-   import createContactReducer from "./createContactReducer";
-   import contactListReducer from "./contactListReducer";
-   import linkContactToClientReducer from "./linkContactToClientReducer";
+import loginReducer from "./loginReducer"; 
+import getDocDetailsReducer from "./getDocDetailsReducer";
+import rraPaymentReducer from "./rraPaymentReducer";
 
 const allReducers = combineReducers({
-     createClient:createClientReducer,
-     clientList:clientListReducer,
-     createContact:createContactReducer,
-     contactList:contactListReducer,
-     linkContactToClient:linkContactToClientReducer,
- 
+
+     getDocDetails: getDocDetailsReducer,
+     rraPayment: rraPaymentReducer,
+     login:loginReducer,
+
+     
 });
 
 export default allReducers;

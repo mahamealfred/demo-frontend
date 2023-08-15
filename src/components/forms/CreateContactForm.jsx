@@ -18,13 +18,13 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import CloseIcon from "@mui/icons-material/Close";
 import { styled } from '@mui/material/styles';
 import dayjs from 'dayjs';
-import { createContactAction } from "../../redux/actions/createContactAction";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   Collapse,
   Alert,
 } from "@mui/material";
-import { contactListAction } from "../../redux/actions/contactListAction";
+
 let easing = [0.6, -0.05, 0.01, 0.99];
 const animate = {
   opacity: 1,
@@ -85,7 +85,7 @@ const CreateContactForm = ({ setAuth }) => {
       const name=values.name
       const sureName=values.sureName
       const email=values.email
-      await dispatch(createContactAction({name,sureName,email}))
+      // await dispatch(createContactAction({name,sureName,email}))
     },
   });
 
@@ -102,27 +102,27 @@ const handleClose=()=>{
   setOpenSuccess(false)
   setOpen(false)
 }
-  useEffect(() => {
-    async function fetchData() {
-      if (!createContact.loading) {
-        if (createContact.details.length !== 0) {
-          if (createContact.details.statusCode === 200) {
-            setSuccessMessage(createContact.details.message)
-           setClientCode(createContact.details.data.name)
-           setOpenSuccess(true)
-           await dispatch(contactListAction())
-          } else {
-            return null;
-          }
-        }
-        if (createContact.error) {
-          setErrorMessage(createContact.error);
-          setOpen(true)
-        }
-      }
-    }
-    fetchData();
-  }, [createContact.details]);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     if (!createContact.loading) {
+  //       if (createContact.details.length !== 0) {
+  //         if (createContact.details.statusCode === 200) {
+  //           setSuccessMessage(createContact.details.message)
+  //          setClientCode(createContact.details.data.name)
+  //          setOpenSuccess(true)
+  //          await dispatch(contactListAction())
+  //         } else {
+  //           return null;
+  //         }
+  //       }
+  //       if (createContact.error) {
+  //         setErrorMessage(createContact.error);
+  //         setOpen(true)
+  //       }
+  //     }
+  //   }
+  //   fetchData();
+  // }, [createContact.details]);
   return (
     <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>

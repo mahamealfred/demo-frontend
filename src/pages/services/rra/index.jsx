@@ -27,6 +27,8 @@ import { useRef } from 'react';
 import { useContext } from "react";
 
 import logo from "../../../assets/images/rra.png"
+import { getDocDetailsAction } from "../../../redux/actions/getDocDetailsAction";
+import { rraPayamentAction } from "../../../redux/actions/rraPaymentAction";
 
 
 
@@ -112,13 +114,32 @@ const Index = (props) => {
      case 0:
        return (
          <Document
-          
+         formData={formData}
+         setFormData={setFormData}
+         docIdErr={docIdErr}
+         errorMessage={errorMessage}
+         setErrorMessage={setErrorMessage}
+         open={open}
+         setOpen={setOpen}
          />
        );
      case 1:
        return (
          <Payment
-         
+         formData={formData}
+         setFormData={setFormData}
+         phoneNumberError={phoneNumberError}
+         passwordError={passwordError}
+         taxPayerName={taxPayerName}
+         rraRef={rraRef}
+         amountToPay={amountToPay}
+         paymentErrorMessage={paymentErrorMessage}
+         setPaymentErrorMessage={setPaymentErrorMessage}
+         openPayment={open}
+         setOpenPayment={setOpen}
+         tin={tin}
+         taxTypeDesc={taxTypeDesc}
+         errorMessage={errorMessage}
 
          />
        );
@@ -132,25 +153,126 @@ const Index = (props) => {
  };
 
  //authentication data
-
-
-
-
- //handle request for rra document id
- const handleDocmentDetails = async () => {
+//fect doc Id details
+useEffect(() => {
+  async function fetchData() {
+    if (!getDocDetails.loading) {
+      if (getDocDetails.details.length !== 0) {
+        if (getDocDetails.details.statusCode === 200) {
+          setBankName(getDocDetails.details.data.bank_name);
+          setRraRef(getDocDetails.details.data.RRA_REF);
+          setTin(getDocDetails.details.data.TIN);
+          setTaxPayerName(getDocDetails.details.data.TAX_PAYER_NAME);
+          setTaxTypeDesc(getDocDetails.details.data.TAX_TYPE_DESC);
+          setTaxCenterNo(getDocDetails.details.data.TAX_CENTRE_NO);
+          setTaxTypeNo(getDocDetails.details.data.TAX_TYPE_NO);
+          setAssessNo(getDocDetails.details.data.ASSESS_NO);
+          setRraOrginNo(getDocDetails.details.data.RRA_ORIGIN_NO);
+          setAmountToPay(getDocDetails.details.data.AMOUNT_TO_PAY);
+          setDescId(getDocDetails.details.data.DEC_ID);
+          // setUsername(auth.username)
+          // setUserGroup(auth.usergroup)
+          // setBrokering(auth.brokering)
+          // setAgentName(auth.names)
+          // setAgentPhoneNumber(auth.phonenumber)
+          handleNext();
+        } else {
+          return null;
+        }
    
- };
+      }
+      if (getDocDetails.error) {
+        setErrorMessage(getDocDetails.error);
+      }
+    }
+  }
+  fetchData();
+ 
+}, [getDocDetails.details]);
+//handle request for rra document id
+const handleDocmentDetails = async () => {
+  if (formData.docId === "") {
+    setDocIdErr("Reference number required");
+  } else if (!Number(formData.docId)) {
+    setDocIdErr("Reference number must be a numeric");
+  }
+  else {
+   setDocIdErr("");
+   setErrorMessage("")
+    const docId = formData.docId;
+    await dispatch(getDocDetailsAction({ docId }));
+  }
+};
+
+
+ 
 
 
 
 
- //handle rra Payament
- const handlePayment = async () => {
+//handle rra Payament
+const handlePayment = async () => {
+  if (formData.phoneNumber === "") {
+    setPhoneNumberError("Phone number required");
+  } else if (!Number(formData.phoneNumber)) {
+    setPhoneNumberError("Phone number must be a number");
+  }else if (formData.password === "") {
+    setPasswordError("Password required");
+  }
+
+ else {
+   setPhoneNumberError("")
+   setPasswordError("")
+
+   // setPaymenterrorMessage("")
+    const payerPhoneNumber = formData.phoneNumber;
+    const password = formData.password;
+    setExecuting(true)
+    try{
+     await dispatch(rraPayamentAction(
+       {
+         bankName,
+         rraRef,
+         tin,
+         taxPayerName,
+         taxTypeDesc,
+         taxCenterNo,
+         taxTypeNo,
+         assessNo,
+         rraOrginNo,
+         amountToPay,
+         descId,
+         payerPhoneNumber,
+         userGroup,
+         brokering,
+       },
+       username,
+       password
+     )
+   );
+    }finally{
+setExecuting(false)
+    }
    
- };
+  }
+};
  //handle on button submit for each step
  const handelSubmit = () => {
-  handleNext();
+  if (rraPayment.error) {
+    setOpenPayment(true);
+  }
+   if (activeStep === 0) {
+     handleDocmentDetails();
+   } else if (activeStep === 1) {
+    handlePayment();
+   } else if (activeStep === 2) {
+ handleNext()
+   } else {
+     return null;
+   }
+   if (getDocDetails.error) {
+    setOpen(true);
+  }
  };
 
  const handleNewpayment = () => {

@@ -50,7 +50,7 @@ const Payment=({
           Payer Name
               </Typography>
               <Typography variant="body2" textAlign="center" sx={{ fontSize: "16px", fontWeight: "bold" }} color="text.secondary">
-             Alfred Mahame
+             {taxPayerName}
               </Typography>
             </Grid>
             <Grid item xs={12} md={4}>
@@ -58,7 +58,7 @@ const Payment=({
             Reference Number
               </Typography>
               <Typography variant="body2" textAlign="center" sx={{ fontSize: "16px", fontWeight: "bold" }} color="text.secondary">
-            12235363663
+            {rraRef}
               </Typography>
             </Grid>
             <Grid item xs={12} md={4}>
@@ -66,7 +66,7 @@ const Payment=({
                 TIN
               </Typography>
               <Typography variant="body2" textAlign="center" sx={{ fontSize: "16px", fontWeight: "bold" }} color="text.secondary">
-          1112290092
+          {tin}
               </Typography>
             </Grid>
             <Grid item xs={12} md={4}>
@@ -74,7 +74,7 @@ const Payment=({
              Tax Description
               </Typography>
               <Typography variant="body2" textAlign="center" sx={{ fontSize: "16px", fontWeight: "bold" }} color="text.secondary">
-             Cleaning Fee
+             {taxTypeDesc}
               </Typography>
             </Grid>
             <Grid item xs={12} md={4}>
@@ -82,7 +82,7 @@ const Payment=({
                Amount To Pay
               </Typography>
               <Typography variant="body2" textAlign="center" sx={{ fontSize: "16px", fontWeight: "bold" }} color="text.secondary">
-         1000 Rwf
+              {Number(amountToPay).toLocaleString()} Rwf
               </Typography>
             </Grid>
   
@@ -92,8 +92,11 @@ const Payment=({
             id="full-width-text-field"
             size="small" 
             placeholder="Placeholder"
-            helperText=""
-            type="password"
+            value={formData.phoneNumber}
+            onChange={(e)=>setFormData({...formData,phoneNumber:e.target.value})}
+            helperText={phoneNumberError? phoneNumberError : ""}
+            error={phoneNumberError}
+            type="text"
             margin="normal"
             fullWidth
             label="Payer Phone" 
@@ -105,7 +108,10 @@ const Payment=({
       id="full-width-text-field"
       size="small" 
       placeholder="Placeholder"
-      helperText=""
+      value={formData.password}
+      onChange={(e)=>setFormData({...formData,password:e.target.value})}
+      helperText={passwordError? passwordError : ""}
+      error={passwordError}
       type="password"
       margin="normal"
       fullWidth

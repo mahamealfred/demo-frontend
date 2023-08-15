@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 // @mui
 import { styled } from '@mui/material/styles';
 //
 import Header from './header';
 import Nav from './nav';
-
+import AuthContext from '../../context';
+import { useSelector } from 'react-redux';
 // ----------------------------------------------------------------------
 
 const APP_BAR_MOBILE = 64;
@@ -32,9 +33,50 @@ const Main = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function DashboardLayout() {
+export default function DashboardLayout({...props}) {
   const [open, setOpen] = useState(false);
-
+  const { auth,setAuth }=useContext(AuthContext)
+  const login=useSelector((state)=>state.login)
+  const [agentName,setAgentName]=useState("");
+  const [username,setUsername]=useState("")
+const [brokering,setBrokering]=useState("")
+const [userGroup,setUserGroup]=useState("");
+  const {children}=props
+  useEffect(() => {
+    async function fetchData() {
+      if (!login.loading) {
+        if (login.details.length !== 0) {
+          if (login.details.resData.statusCode === 200) {
+            setAuth({
+            username:auth.user,
+          //username:login.users.resData.data.phonenumber,
+            brokering:login.details.resData.data.brokering,
+            usergroup:login.details.resData.data.group,
+            password:login.details.password,
+            email:login.details.resData.data.email,
+            names:login.details.resData.data.fullName,
+            phonenumber:login.details.resData.data.phoneNumber,
+            basicAuth:login.details.basicAuth,
+      
+          
+          })
+           setUsername(auth.user)
+           setBrokering(login.details.resData.data.brokering)
+           setUserGroup(login.details.resData.data.group)
+          
+          } else {
+           
+            return  null
+          }
+        
+        }
+      
+      }
+    }
+    fetchData();
+   
+  }, [login.details]);
+  console.log("")
   return (
     <StyledRoot>
       <Header onOpenNav={() => setOpen(true)} />

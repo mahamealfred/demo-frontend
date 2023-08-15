@@ -18,14 +18,15 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import CloseIcon from "@mui/icons-material/Close";
 import { styled } from '@mui/material/styles';
 import dayjs from 'dayjs';
-import { createContactAction } from "../../redux/actions/createContactAction";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   Collapse,
   Alert,
 } from "@mui/material";
-import { contactListAction } from "../../redux/actions/contactListAction";
+
 import { useNavigate } from "react-router-dom";
+import { loginAction } from "../../redux/actions/loginAction";
 let easing = [0.6, -0.05, 0.01, 0.99];
 const animate = {
   opacity: 1,
@@ -61,29 +62,35 @@ const SignInForm= ({ setAuth }) => {
   const navigate=useNavigate();
   const dispatch=useDispatch()
   const SignupSchema = Yup.object().shape({
+    username: Yup.string()
+    .min(2, "Too Short!")
+    .max(50, "Too Long!")
+    .required("Username required"),
     password: Yup.string()
       .min(2, "Too Short!")
       .max(50, "Too Long!")
-      .required("Name required"),
-    email: Yup.string()
-      .email("Email must be a valid email address")
-      .required("Email is required"),
+      .required("Password required"),
+    // email: Yup.string()
+    //   .email("Email must be a valid email address")
+    //   .required("Email is required"),
 
   });
 
   const formik = useFormik({
     initialValues: {
+      username:"",
       password: "",
-      email: "",
+      // email: "",
      
     },
     validationSchema: SignupSchema,
     onSubmit: async(values) => {
+      const username=values.username
       const password=values.password
-      const email=values.email
-      console.log("kkk",values)
-     // await dispatch(createContactAction({name,sureName,email}))
-     navigate('/dashboard/services')
+     await dispatch(loginAction({username,password},navigate))
+    if (login.error) {
+      setOpenErrorMessage(true)
+    }
     },
   });
 
@@ -93,39 +100,43 @@ const [successMessage,setSuccessMessage]=useState("")
 const [clientCode,setClientCode]=useState("")
 const [open,setOpen]=useState(true)
 const [openSuccess,setOpenSuccess]=useState(true)
-const createContact=useSelector((state)=>state.createContact)
+const [openErrorMessage,setOpenErrorMessage]=useState(true)
+
+const login=useSelector((state)=>state.login);
+
 const handleClose=()=>{
-  createContact.details=['']
-  createContact.error=['']
-  setOpenSuccess(false)
+  login.details=[]
+  login.error=[]
+  setOpenErrorMessage(false)
   setOpen(false)
 }
   useEffect(() => {
     async function fetchData() {
-      if (!createContact.loading) {
-        if (createContact.details.length !== 0) {
-          if (createContact.details.statusCode === 200) {
-            setSuccessMessage(createContact.details.message)
-           setClientCode(createContact.details.data.name)
-           setOpenSuccess(true)
-           await dispatch(contactListAction())
-          } else {
-            return null;
-          }
+      // if (!login.loading) {
+      //   if (createContact.d.length !== 0) {
+      //     if (createContact.details.statusCode === 200) {
+      //       setSuccessMessage(createContact.details.message)
+      //      setClientCode(createContact.details.data.name)
+      //      setOpenSuccess(true)
+      //      await dispatch(contactListAction())
+      //     } else {
+      //       return null;
+      //     }
+       // }
+        if (login.error) {
+       
+          setErrorMessage(login.error);
+         
         }
-        if (createContact.error) {
-          setErrorMessage(createContact.error);
-          setOpen(true)
-        }
-      }
+     // }
     }
     fetchData();
-  }, [createContact.details]);
+  }, [login.error]);
   return (
     <FormikProvider value={formik}>
       <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
       { !errorMessage ? null : (
-                <Collapse in={open}>
+                <Collapse in={openErrorMessage}>
                     <Alert severity="error"
                         action={
                             <IconButton
@@ -146,7 +157,7 @@ const handleClose=()=>{
                 </Collapse>
             )
         }
-         { !successMessage ? null : (
+         {/* { !successMessage ? null : (
                 <Collapse in={openSuccess}>
                     <Alert severity="success"
                         action={
@@ -167,7 +178,7 @@ const handleClose=()=>{
                         </Alert>
                 </Collapse>
             )
-        }
+        } */}
         <Stack spacing={4}>
        
           <Stack
@@ -181,14 +192,14 @@ const handleClose=()=>{
                fullWidth
                size="small"
                autoComplete="username"
-               name="email"
-               value={formik.values.email}
+               name="usernamme"
+               value={formik.values.username}
                onChange={formik.handleChange}
-               type="email"
-               label="Email"
-               {...getFieldProps("email")}
-               error={Boolean(touched.email && errors.email)}
-               helperText={touched.email && errors.email}
+               type="text"
+               label="Usenname"
+               {...getFieldProps("username")}
+               error={Boolean(touched.username && errors.username)}
+               helperText={touched.username && errors.username}
             />
           </Stack>
           <Stack

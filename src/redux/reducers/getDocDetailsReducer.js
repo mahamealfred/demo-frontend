@@ -1,8 +1,8 @@
 import {
-    LINK_CONTACT_TO_CLIENT_REQUEST,
-    LINK_CONTACT_TO_CLIENT_SUCCESS,
-    LINK_CONTACT_TO_CLIENT_FAILURE,
-  } from "../types/linkContactToClientType";
+    GET_DOC_DETAILS_REQUEST,
+    GET_DOC_DETAILS_SUCCESS,
+    GET_DOC_DETAILS_FAILURE,
+  } from "../types/getDocDetailsType";
   
   const initialState = {
     loading: false,
@@ -12,18 +12,18 @@ import {
   
   const reducer = (state = initialState, action) => {
     switch (action.type) {
-      case LINK_CONTACT_TO_CLIENT_REQUEST:
+      case GET_DOC_DETAILS_REQUEST:
         return {
-          ...state, 
+          ...state, //spredding
           loading: true,
         };
-      case LINK_CONTACT_TO_CLIENT_SUCCESS:
+      case GET_DOC_DETAILS_SUCCESS:
         return {
           loading: false,
           details: action.payload,
           error: "",
         };
-      case LINK_CONTACT_TO_CLIENT_FAILURE:
+      case GET_DOC_DETAILS_FAILURE:
         return {
           loading: false,
           details: [],

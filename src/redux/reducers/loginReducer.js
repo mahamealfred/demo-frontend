@@ -1,8 +1,8 @@
 import {
-    CLIENT_LIST_REQUEST,
-    CLIENT_LIST_SUCCESS,
-    CLIENT_LIST_FAILURE,
-  } from "../types/clientListType";
+   LOGIN_REQUEST,
+   LOGIN_SUCCESS,
+   LOGIN_FAILURE,
+  } from "../types/loginType";
   
   const initialState = {
     loading: false,
@@ -12,18 +12,18 @@ import {
   
   const reducer = (state = initialState, action) => {
     switch (action.type) {
-      case CLIENT_LIST_REQUEST:
+      case LOGIN_REQUEST:
         return {
           ...state, 
           loading: true,
         };
-      case CLIENT_LIST_SUCCESS:
+      case LOGIN_SUCCESS:
         return {
           loading: false,
           details: action.payload,
           error: "",
         };
-      case CLIENT_LIST_FAILURE:
+      case LOGIN_FAILURE:
         return {
           loading: false,
           details: [],

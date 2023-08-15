@@ -49,7 +49,7 @@ const Document = ({
                         sx={
                             {mb: 0.2}
                     }>
-                        {/* {errorMessage==="Deralation is no longer valid"?`${t("rra:referencernumberisnolongervalid")}`:errorMessage}  */}
+                        
                         {errorMessage} 
                         
                         </Alert>
@@ -72,8 +72,10 @@ const Document = ({
                         <TextField
       id="full-width-text-field"
       size="small" 
-      placeholder="Placeholder"
-      helperText=""
+      value={ formData.docId}
+      onChange={(e) => setFormData({...formData,docId: e.target.value})}
+      helperText={docIdErr ? docIdErr : ""}
+      error={docIdErr}
       margin="normal"
       fullWidth
       label="Reference Number" 
