@@ -30,7 +30,7 @@ import logo from "../../../assets/images/rra.png"
 import { getDocDetailsAction } from "../../../redux/actions/getDocDetailsAction";
 import { rraPayamentAction } from "../../../redux/actions/rraPaymentAction";
 
-
+import AuthContext from "../../../context";
 
 // const  ComponentToPrint=React.lazy(()=>import("./ComponentToPrint").then(module=>{
 //   return {default: module.ComponentToPrint}
@@ -107,7 +107,7 @@ const Index = (props) => {
 } = props;
 
 
-// const { auth }=useContext(AuthContext)
+const { auth }=useContext(AuthContext)
 
  const getStepContent = (step) => {
    switch (step) {
@@ -145,7 +145,15 @@ const Index = (props) => {
        );
      case 2:
        return <Review 
-    
+       dateTime={dateTime}
+       transactionId={transactionId}
+       transactionStatus={transactionStatus}
+       taxPayerName={taxPayerName}
+       amountToPay={amountToPay}
+       agentName={agentName}
+       tin={tin}
+       taxTypeDesc={taxTypeDesc}
+       clientCharges={clientCharges}
        />;
      default:
        throw new Error("Unknown step");
@@ -170,10 +178,10 @@ useEffect(() => {
           setRraOrginNo(getDocDetails.details.data.RRA_ORIGIN_NO);
           setAmountToPay(getDocDetails.details.data.AMOUNT_TO_PAY);
           setDescId(getDocDetails.details.data.DEC_ID);
-          // setUsername(auth.username)
-          // setUserGroup(auth.usergroup)
-          // setBrokering(auth.brokering)
-          // setAgentName(auth.names)
+          setUsername(auth.username)
+          setUserGroup(auth.group)
+          setBrokering(auth.brokering)
+           setAgentName(auth.fullName)
           // setAgentPhoneNumber(auth.phonenumber)
           handleNext();
         } else {
@@ -189,6 +197,30 @@ useEffect(() => {
   fetchData();
  
 }, [getDocDetails.details]);
+//fecth payment response
+useEffect(()=>{
+  async function fetchData(){
+   if (!rraPayment.loading) {
+     if (rraPayment.details.length !== 0) {
+       if (rraPayment.details.statusCode === 200) {
+         setTransactionId(rraPayment.details.data.transactionId)
+         setDateTime(rraPayment.details.data.date)
+         setTransactionStatus(rraPayment.details.status)
+         setClientCharges("10")
+         handleNext();
+       } else {
+         return null;
+       }
+     }
+     if (rraPayment.error) {
+       setPaymentErrorMessage(rraPayment.error);
+     }
+   }
+  
+  }
+  fetchData();
+   },[rraPayment.details,rraPayment.error])
+  
 //handle request for rra document id
 const handleDocmentDetails = async () => {
   if (formData.docId === "") {
@@ -276,7 +308,13 @@ setExecuting(false)
  };
 
  const handleNewpayment = () => {
-  
+  formData.docId = "";
+  formData.password = "";
+  formData.phoneNumber = "";
+  getDocDetails.details=['']
+  getDocDetails.error=['']
+  rraPayment.details=['']
+  rraPayment.error=['']
   setActiveStep(0)
  };
 
@@ -285,7 +323,18 @@ setExecuting(false)
  };
 
  const handleBack = () => {
-  
+  formData.password = "";
+  formData.docId=""
+  setDocIdErr("");
+  setPasswordError("");
+  setPhoneNumberError("");
+  setErrorMessage("");
+  getDocDetails.error=['']
+  setPaymentErrorMessage("");
+  getDocDetails.details=['']
+  rraPayment.details=['']
+  getDocDetails.loading=false
+  rraPayment.loading=false
    setActiveStep(0);
    //history.push("/dashboard",{push:true})
    //setOpenRRA(false)

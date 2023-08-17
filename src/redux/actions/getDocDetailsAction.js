@@ -10,7 +10,7 @@ export const getDocDetailsAction = (details) => async (dispatch) => {
   try {
     dispatch(getDocDetailsRequest());
     const docId=details.docId;
-    const Url=`http://localhost:8000/api/goverment-service/rra-service/doc-id-validation/${docId}`;
+    const Url=`https://api.0360.money/api/goverment-service/rra-service/doc-id-validation/${docId}`;
     const res = await axios.get(Url,{
   //params:{ rra_doc_id_ref:docId },
    }, {

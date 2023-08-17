@@ -12,9 +12,9 @@ export const loginAction = (user,navigate) => async (dispatch) => {
     dispatch(loginRequest());
     const {username}=user
     const {password}=user 
-   const basicAuth = Buffer.from(`${username}:${password}`).toString('base64');
+  // const basicAuth = Buffer.from(`${username}:${password}`).toString('base64');
    //const Url=process.env.REACT_APP_BASE_URL+'/authentication/signin';
-   const Url="http://localhost:8000/api/authentication/signin"
+   const Url="https://api.0360.money/api/authentication/signin"
    const res = await axios.post(Url,{}, {
       withCredentials: true,
     Headers:{
@@ -35,7 +35,7 @@ export const loginAction = (user,navigate) => async (dispatch) => {
       const username=res.data.data.username
       const token=res.data.data.token
       const resData=res.data
-      dispatch(loginSuccess({resData,password:password,basicAuth:basicAuth}));
+      dispatch(loginSuccess({resData,password:password}));
       sessionStorage.setItem('quantum-auth',token)
      navigate('/dashboard/services')
       return  sessionStorage.setItem('quantum-auth',token);
