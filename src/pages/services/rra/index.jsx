@@ -390,7 +390,7 @@ setExecuting(false)
                   </Typography>
                 
                   <Button onClick={handleNewpayment} sx={{ mt: 3, ml: 1 }}>
-              New Payment
+                New Payment
                   </Button>
                   
                 </React.Fragment>
@@ -398,7 +398,7 @@ setExecuting(false)
                 <React.Fragment>
                 {getStepContent(activeStep)}
                 <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                  {activeStep == 0 || activeStep !==2? (
+                  {activeStep !== 0 && activeStep !==2? (
                     <Button onClick={handleBack} 
                    //sx={{ mt: 3, ml: 1 }}
                     sx={{ my: 1, mx: 1.5 }}

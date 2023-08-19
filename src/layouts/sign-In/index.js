@@ -23,7 +23,7 @@ const StyledContent = styled('div')(({ theme }) => ({
 
 //////////////////////////////////
 const RootStyle = styled("div")({
-background:"#000057",
+//background:"#000057",
 backgroundImage: `url(${bgImg})`,
 width: "100%",
 // height: "100%",

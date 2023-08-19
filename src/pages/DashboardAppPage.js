@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { faker } from '@faker-js/faker';
 // @mui
 import { useTheme } from '@mui/material/styles';
-import { Grid, Container, Typography, Button, CardActionArea, CardMedia, CardContent, Card } from '@mui/material';
+import { Grid, Container, Typography, Button, CardActionArea, CardMedia, CardContent, Card, IconButton } from '@mui/material';
 import rraLogo from "../assets/images/rra.png"
 import mutuwelLogo from "../assets/images/rssb.avif";
 import electricityLogo from "../assets/images/electricity.png";
@@ -19,6 +19,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import RraPage from "../pages/services/rra";
 // components
 import Iconify from '../components/iconify';
+import CloseIcon from '@mui/icons-material/Close';
 // sections
 import {
 
@@ -57,6 +58,18 @@ export default function DashboardAppPage() {
       >
         <DialogTitle id="alert-dialog-title">
           {"RRA Payment Service"}
+          <IconButton
+          aria-label="close"
+          onClick={handleClose}
+          sx={{
+            position: 'absolute',
+            right: 8,
+            top: 8,
+            color: (theme) => theme.palette.grey[500],
+          }}
+        >
+          <CloseIcon />
+        </IconButton>
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">

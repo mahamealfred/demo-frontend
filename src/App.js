@@ -6,14 +6,14 @@ import ThemeProvider from './theme';
 import ScrollToTop from './components/scroll-to-top';
 import { HelmetProvider } from 'react-helmet-async';
 import { Box } from "@mui/material";
-import RiseLoader from "react-spinners/RiseLoader";
+import RingLoader from "react-spinners/RingLoader";
 function App() {
   return (
     <HelmetProvider>
  <Suspense fallback={<Box
 sx={{display:"flex",justifyContent:"center",alignItems:"center",height:"100vh"}}
 >
-<RiseLoader color="blue" size={100}  />
+<RingLoader color="#000057" size={100}  />
 </Box>}
  
  >

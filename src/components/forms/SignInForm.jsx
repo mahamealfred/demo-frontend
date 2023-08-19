@@ -65,7 +65,7 @@ const SignInForm= ({ setAuth }) => {
     username: Yup.string()
     .min(2, "Too Short!")
     .max(50, "Too Long!")
-    .required("Username required"),
+    .required("User Name required"),
     password: Yup.string()
       .min(2, "Too Short!")
       .max(50, "Too Long!")
@@ -192,11 +192,11 @@ const handleClose=()=>{
                fullWidth
                size="small"
                autoComplete="username"
-               name="usernamme"
+               name="username"
                value={formik.values.username}
                onChange={formik.handleChange}
                type="text"
-               label="Usenname"
+               label="User Name"
                {...getFieldProps("username")}
                error={Boolean(touched.username && errors.username)}
                helperText={touched.username && errors.username}
