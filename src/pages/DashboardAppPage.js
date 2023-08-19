@@ -94,10 +94,10 @@ export default function DashboardAppPage() {
                 alt="rra logo"
                    />
                  <CardContent>
-                 <Typography gutterBottom variant="h5" component="div">
+                 <Typography gutterBottom variant="h5" textAlign="center" component="div">
                  RRA Payment Service
                 </Typography>
-               <Typography variant="body2" color="text.secondary">
+               <Typography variant="body2" textAlign="center" color="text.secondary">
                 By using this service you will be able to pay RRA tax.
                 </Typography>
                 </CardContent>
@@ -122,11 +122,11 @@ export default function DashboardAppPage() {
                 alt="rra logo"
                    />
                  <CardContent>
-                 <Typography gutterBottom variant="h5" component="div">
+                 <Typography gutterBottom variant="h5" textAlign="center" component="div">
                  Mituwel Payment Service
                 </Typography>
-               <Typography variant="body2" color="text.secondary">
-                By using this service you will be able to pay MUTUWEL.
+               <Typography variant="body2" color="text.secondary" textAlign="center">
+                By using this service you will be able to pay MITUWEL.
                 </Typography>
                 </CardContent>
               </CardActionArea>
@@ -148,10 +148,10 @@ export default function DashboardAppPage() {
                 alt="rra logo"
                    />
                  <CardContent>
-                 <Typography gutterBottom variant="h5" component="div">
+                 <Typography gutterBottom variant="h5" component="div" textAlign="center">
                  Electricty Payment Service
                 </Typography>
-               <Typography variant="body2" color="text.secondary">
+               <Typography variant="body2" color="text.secondary" textAlign="center">
                 By using this service you will be able to pay ELECTRICITY.
                 </Typography>
                 </CardContent>
@@ -174,11 +174,11 @@ export default function DashboardAppPage() {
                 alt="rra logo"
                    />
                  <CardContent>
-                 <Typography gutterBottom variant="h5" component="div">
+                 <Typography gutterBottom variant="h5" component="div" textAlign="center">
                  Ejehoze Payment Service
                 </Typography>
-               <Typography variant="body2" color="text.secondary">
-                By using this service you will be able to pay MITUWEL.
+               <Typography variant="body2" color="text.secondary" textAlign="center">
+                By using this service you will be able to pay EjoHeza.
                 </Typography>
                 </CardContent>
               </CardActionArea>

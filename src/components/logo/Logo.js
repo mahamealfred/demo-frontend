@@ -80,7 +80,9 @@ const Logo = forwardRef(({ disabledLink = false, sx, ...other }, ref) => {
 
   return (
     <Link to="/dashboard/services" component={RouterLink} sx={{ display: 'contents' }}>
-       <img src={logoo} alt="logo" height="60" width="180" margin="10px" />
+       <img src={logoo} alt="logo" height="70" width="180" 
+     
+       />
     </Link>
   );
 });

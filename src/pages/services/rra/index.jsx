@@ -26,7 +26,8 @@ import { useRef } from 'react';
 
 import { useContext } from "react";
 
-import logo from "../../../assets/images/rra.png"
+import logos from "../../../assets/images/rra.png"
+import logo from "../../../assets/images/logos.png"
 import { getDocDetailsAction } from "../../../redux/actions/getDocDetailsAction";
 import { rraPayamentAction } from "../../../redux/actions/rraPaymentAction";
 
@@ -364,7 +365,7 @@ setExecuting(false)
    
           </Typography>
            <img
-                  src={logo}
+                  src={logos}
                   alt="logo"
                   height={70}
                   width={85}
@@ -395,43 +396,62 @@ setExecuting(false)
                 </React.Fragment>
               ) : (
                 <React.Fragment>
-                  {getStepContent(activeStep)}
-                  <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-                    {activeStep == 0 || activeStep !==2? (
-                      <Button onClick={handleBack} 
-                     //sx={{ mt: 3, ml: 1 }}
-                      sx={{ my: 1, mx: 1.5 }}
-                      >
-             Cancel
-                      </Button>
-                    ):null}
-
-                    <Button
-                     disabled={executing || disabled}
-                     {...otherProps}
-                      onClick={handelSubmit}
-                      // sx={{ mt: 3, ml: 1 }}
-                      sx={{ my: 1, mx: 1.5 }}
+                {getStepContent(activeStep)}
+                <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+                  {activeStep == 0 || activeStep !==2? (
+                    <Button onClick={handleBack} 
+                   //sx={{ mt: 3, ml: 1 }}
+                    sx={{ my: 1, mx: 1.5 }}
                     >
-                      
-                      {/* {activeStep === steps.length - 1 ? 'Mke payment' : 'Next'} */}
-                      {activeStep === steps.length - 1
-                        ? <>
-                        <ReactToPrint
-             trigger={() => <Button> Receipt</Button>}
-            content={() => componentRef.current}
-               />
-               <Box sx={{display:'none'}}>
-               <ComponentToPrint 
-              
-               />
-               </Box>
-                </>
-                        : activeStep === 0?
-                    "Submit":"Make Payment"}
+              Cancel
                     </Button>
-                  </Box>
-                </React.Fragment>
+                  ):null}
+
+                  <Button
+                   disabled={executing || disabled}
+                   {...otherProps}
+                    onClick={handelSubmit}
+                    // sx={{ mt: 3, ml: 1 }}
+                    sx={{ my: 1, mx: 1.5 }}
+                  >
+                    
+                    {/* {activeStep === steps.length - 1 ? 'Mke payment' : 'Next'} */}
+                    {activeStep === steps.length - 1
+                      ? <>
+                      <ReactToPrint
+           trigger={() => <Button> Receipt</Button>}
+          content={() => componentRef.current}
+             />
+             <Box sx={{display:'none'}}>
+             <ComponentToPrint 
+             ref={componentRef} 
+             dateTime={dateTime}
+             transactionId={transactionId}
+             transactionStatus={transactionStatus}
+             taxPayerName={taxPayerName}
+             amountToPay={amountToPay}
+             agentName={agentName}
+             agentPhoneNumber={agentPhoneNumber}
+             rraRef={rraRef}
+             tin={tin}
+             taxTypeDesc={taxTypeDesc}
+             clientCharges={clientCharges}
+             logo={logo}
+             />
+             </Box>
+              </>
+                      : activeStep === 0
+                      ? getDocDetails.loading?
+                      <Box sx={{ display: 'flex',justifyContent:"center" }}>
+                      <CircularProgress  sx={{ color: '#000057'}} />
+                       </Box>:"Submit"
+                      : rraPayment.loading?
+                      <Box sx={{ display: 'flex',justifyContent:"center" }}>
+                      <CircularProgress  sx={{ color: '#000057'}} />
+                       </Box>:"Payment"}
+                  </Button>
+                </Box>
+              </React.Fragment>
               )}
             </React.Fragment>
           </Paper>

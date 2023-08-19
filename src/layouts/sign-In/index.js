@@ -7,12 +7,13 @@ import CreateContactForm from "../../components/forms/CreateContactForm";
 import { motion } from "framer-motion";
 import ContactList from "../../components/forms/ContactList";
 import SignInForm from "../../components/forms/SignInForm";
+import bgImg from "../../assets/images/bgImg.jpg"
 
 const AppBar =lazy(() => import('../../components/appbar'))
 const StyledContent = styled('div')(({ theme }) => ({
     maxWidth: 480,
     margin: 'auto',
-    minHeight: '35vh',
+    minHeight: '25vh',
     display: 'flex',
     justifyContent: 'center',
  
@@ -23,11 +24,24 @@ const StyledContent = styled('div')(({ theme }) => ({
 //////////////////////////////////
 const RootStyle = styled("div")({
 background:"#000057",
-// background: "rgb(249, 250, 251)",
-  height: "55vh",
+backgroundImage: `url(${bgImg})`,
+width: "100%",
+// height: "100%",
+backgroundPosition: "center",
+ backgroundSize: "cover",
+//backgroundImage: "url('../../assets/images/bgImg.jpg')",
+ backgroundRepeat: "no-repeat",
+  height: "75vh",
   display: "grid",
-  placeItems: "center",
+  opacity: 1,
+ // placeItems: "center",
+
 });
+const SubRootStyle = styled("div")({
+  display: "grid",
+   placeItems: "center",
+  
+  });
 
 const HeadingStyle = styled(Box)({
   textAlign: "center",
@@ -63,9 +77,12 @@ const fadeInUp = {
 const SignIn = ({ setAuth }) => {
   return (
     <React.Fragment>
-    <AppBar/>
+    
     <CssBaseline/>
+    
     <RootStyle>
+    <AppBar/>
+    < SubRootStyle>
     <Paper elevation={2}
      style={{ borderRadius: 15 }}
     >
@@ -94,6 +111,7 @@ Forgot Password?
         </ContentStyle>
       </Container>
       </Paper>
+    </SubRootStyle>
     </RootStyle>
 
     <Container>

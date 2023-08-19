@@ -22,13 +22,19 @@ function Index() {
 
   return (
 <Box >
-<AppBar  sx={{backgroundColor:"#000057"}} position="sticky" elevation={0}>
+<AppBar  
+sx={{
+ // backgroundColor:"#000057"
+  background: 'transparent', 
+  boxShadow: 'none'
+}} 
+position="sticky" elevation={0}>
   <Toolbar>
    
      <Box
             component="img"
             sx={{
-            height: "10vh",
+            height: "15vh",
             objectFit:"contain",
             flexGrow:{xs:0.5,sm:0.2}
             }}
